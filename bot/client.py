@@ -11,7 +11,7 @@ import shutil
  
 
 
-
+start_path = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 proj_path = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] + "/bothelper/"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bothelper.settings")
 sys.path.append(proj_path)

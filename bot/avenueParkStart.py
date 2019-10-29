@@ -180,6 +180,7 @@ async def back_handler(message: types.Message, state: FSMContext):
     # try:
     room = client.getRooms().get(title=recieved_text)
 
+
     if client.getUserLanguage(user)=="RU":
         text = room.descriptionRU
     else:
@@ -191,12 +192,21 @@ async def back_handler(message: types.Message, state: FSMContext):
         media = []
 
         for photo in room_photoes:
-            media.append(InputMediaPhoto(os.path.join(client.proj_path, "media", str(photo.photo).replace("media/", ""))))
+            
 
-        await bot.send_media_group(user, media)
+            media.append(InputMediaPhoto(InputFile(os.path.join(client.start_path, "bothelper","media", str(photo.photo).replace("media/", "")))))
+
+        await states.User.language_set.set()
+
+        await bot.send_media_group(user, types.MediaGroup(media))
+        await bot.send_message(user, text=text, reply_markup=keyboards.MenuKeyboard(user))
+
     else:
+
+        await states.User.language_set.set()
+
         await bot.send_photo(user, room.photo.all()[0].photo)
-        await bot.send_message(user, text=text, reply_markup=None)
+        await bot.send_message(user, text=text, reply_markup=keyboards.MenuKeyboard(user))
     
 
     # except Exception as e:
@@ -229,7 +239,7 @@ async def back_handler(message: types.Message, state: FSMContext):
 
     if current_state in ["Sale:started", "Rent:started", "OnlineSearch:type_choosen", "OnlineSearch:title_added", "OnlineSearch:region_added", "OnlineSearch:region_added"]:
 
-        await User.language_set.set()
+        await states.User.language_set.set()
 
         photoes = os.listdir(os.getcwd()+"/Users/"+str(user)+"/")
         for a in photoes:
