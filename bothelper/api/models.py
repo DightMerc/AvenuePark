@@ -29,6 +29,8 @@ class Room(models.Model):
     descriptionRU = models.TextField("Описание РУ")
     descriptionUZ = models.TextField("Описание УЗ")
 
+    add = models.BooleanField("Дополнительная информация", default=False)
+
     photoes = models.ManyToManyField(Photo)
 
     def __str__(self):

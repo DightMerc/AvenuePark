@@ -14,6 +14,9 @@ class User(StatesGroup):
     roomPicture = State()
     priceList = State()
 
+    addPicture = State()
+
+
     ammount_set = State()
     add_info = State()
     contact = State()

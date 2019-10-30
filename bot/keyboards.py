@@ -7,8 +7,8 @@ import client
 def LanguageKeyboard(user):
 
     return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-        KeyboardButton('Ўзбек тили'),
-        KeyboardButton('Русский язык')
+        KeyboardButton('🇺🇿 Ўзбек тили'),
+        KeyboardButton('🇷🇺 Русский язык')
 )
 
 def PriceSetKeyboard(user):
@@ -51,14 +51,14 @@ def OnlineKeyboardApply(user):
 def AboutUsKeyboard(user):
         if client.getUserLanguage(user)=="RU":
                 return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-                                KeyboardButton('Как нас найти'),
-                                KeyboardButton('Как связаться')
-                        ).add(KeyboardButton('Задать вопрос'))
+                                KeyboardButton('📍 Как нас найти'),
+                                KeyboardButton('📞 Как связаться')
+                        ).add(KeyboardButton('❔ Задать вопрос'))
         else:
                 return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-                                KeyboardButton('Как нас найти'),
-                                KeyboardButton('Как связаться')
-                        ).add(KeyboardButton('Задать вопрос'))
+                                KeyboardButton('📍 Как нас найти'),
+                                KeyboardButton('📞 Как связаться')
+                        ).add(KeyboardButton('❔ Задать вопрос'))
 
 
 def SendKeyboard(user):
@@ -77,36 +77,48 @@ def RoomKeyboard(user):
 			buttons = []
 			for region in client.getRooms():
 					buttons.append(KeyboardButton("{}".format(region.title)))
-			return ReplyKeyboardMarkup(keyboard=build_menu(buttons, 2, footer_buttons=KeyboardButton('⏮ Назад')),one_time_keyboard=True, resize_keyboard=True)
+			return ReplyKeyboardMarkup(keyboard=build_menu(buttons, 2),one_time_keyboard=True, resize_keyboard=True)
 	else:
 			buttons = []
-			for region in client.getRooms("UZ"):
+			for region in client.getRooms():
 					buttons.append(KeyboardButton("{}".format(region.title)))
-			return ReplyKeyboardMarkup(keyboard=build_menu(buttons, 2, footer_buttons=KeyboardButton('⏮ Ортга')),one_time_keyboard=True, resize_keyboard=True)
+			return ReplyKeyboardMarkup(keyboard=build_menu(buttons, 2),one_time_keyboard=True, resize_keyboard=True)
+
+def AddKeyboard(user):
+	if client.getUserLanguage(user)=="RU":
+			buttons = []
+			for region in client.getAdd():
+					buttons.append(KeyboardButton("{}".format(region.title)))
+			return ReplyKeyboardMarkup(keyboard=build_menu(buttons, 2),one_time_keyboard=True, resize_keyboard=True)
+	else:
+			buttons = []
+			for region in client.getAdd():
+					buttons.append(KeyboardButton("{}".format(region.title)))
+			return ReplyKeyboardMarkup(keyboard=build_menu(buttons, 2),one_time_keyboard=True, resize_keyboard=True)
 
 def ComplexKeyboard(user):
         if client.getUserLanguage(user)=="RU":
                 return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-                                KeyboardButton('Дополнительные услуги'),
-                                KeyboardButton('Номера')
-                        ).add(KeyboardButton('Прайс лист'))
+                                KeyboardButton('➕ Дополнительные услуги'),
+                                KeyboardButton('🔑 Номера')
+                        )
         else:
                 return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-                                KeyboardButton('Дополнительные услуги'),
-                                KeyboardButton('Номера')
-                        ).add(KeyboardButton('Прайс лист'))
+                                KeyboardButton('➕ Дополнительные услуги'),
+                                KeyboardButton('🔑 Номера')
+                        )
 
 
 def MenuKeyboard(user):
         if client.getUserLanguage(user)=="RU":
                 return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-                                KeyboardButton('О комплексе'),
-                                KeyboardButton('Маршрут')
+                                KeyboardButton('🏘 О комплексе'),
+                                KeyboardButton('📍 Маршрут')
                         ).add(KeyboardButton('О нас'))
         else:
                 return ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-                                KeyboardButton('О комплексе'),
-                                KeyboardButton('Маршрут')
+                                KeyboardButton('🏘 О комплексе'),
+                                KeyboardButton('📍 Маршрут')
                         ).add(KeyboardButton('О нас'))
     
 def MoreKeyboard(user, num):

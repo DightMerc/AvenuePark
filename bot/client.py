@@ -236,7 +236,10 @@ def getMessage(number):
     return bot_models.Message.objects.get(number=number).text
 
 def getRooms():
-    return api_models.Room.objects.all()
+    return api_models.Room.objects.all().filter(add=False)
+
+def getAdd():
+    return api_models.Room.objects.all().filter(add=True)
 
 def GetLastAnnouncment():
     return api_models.Order.objects.all().count() + 1
