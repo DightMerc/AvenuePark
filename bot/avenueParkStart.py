@@ -224,7 +224,7 @@ async def back_handler(message: types.Message, state: FSMContext):
 
         await states.User.language_set.set()
 
-        await bot.send_photo(user, room.photo.all()[0].photo)
+        await bot.send_photo(user, InputFile(os.path.join(client.start_path, "bothelper","media", str(room_photoes[0].photo).replace("media/", ""))))
         await bot.send_message(user, text=text, reply_markup=keyboards.MenuKeyboard(user))
     
 
